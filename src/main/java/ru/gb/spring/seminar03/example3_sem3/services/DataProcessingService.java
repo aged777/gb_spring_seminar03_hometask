@@ -1,27 +1,29 @@
-package ru.gb.spring.seminar03.example3_sem3.repository;
+package ru.gb.spring.seminar03.example3_sem3.services;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.gb.spring.seminar03.example3_sem3.domain.User;
+import ru.gb.spring.seminar03.example3_sem3.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Основная задача класса UserRepository - быть хранилищем для пользователей
+ * Класс DataProcessingService - для обработки данных
  */
+@Service
+public class DataProcessingService {
 
-@Repository
-public class UserRepository {
-    private List<User> users = new ArrayList<>();
+    @Autowired
+    private UserRepository repository;
 
-    public List<User> getUsers() {
-        return users;
+    public UserRepository getRepository() {
+        return repository;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void addUserToList(User user) {
+        repository.getUsers().add(user);
     }
 
     public List<User> sortUsersByAge(List<User> users) {
